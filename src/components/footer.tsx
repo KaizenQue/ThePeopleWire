@@ -99,9 +99,13 @@ const Footer = () => {
       {/* App Download */}
       <div className="mt-12 border border-[#F3CB04] rounded-lg px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center font-bold text-black">
-            WIRE
-          </div>
+           <Image
+            src="/footerLogo.png"
+            alt="The People Wire"
+            width={60}
+            height={30}
+            priority
+          />
           <div>
             <p className="font-semibold text-2xl">Download <span className="text-[#F3CB04]">Our App</span> Now!</p>
             <p className="text-sm text-gray-400">
