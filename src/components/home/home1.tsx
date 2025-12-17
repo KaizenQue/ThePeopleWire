@@ -144,7 +144,7 @@ const Home1: React.FC = () => {
       className="w-full px-4 lg:px-8 py-12"
       style={{ fontFamily: "var(--font-albert-sans)" }}
     >
-      <h2 className="text-3xl font-bold text-white mb-8">Top Stories</h2>
+      <h2 className="text-3xl font-bold text-black mb-8">Top Stories</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* FEATURED */}

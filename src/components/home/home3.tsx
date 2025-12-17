@@ -1,5 +1,5 @@
 "use client";
- 
+import "./home3.css"
 import Image from "next/image";
 import { useRef, useState } from "react";
  
