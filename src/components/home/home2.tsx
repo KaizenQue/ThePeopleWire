@@ -109,7 +109,7 @@ export default function Home4() {
   };
 
   return (
-    <section className="w-full bg-white py-8 md:py-12">
+    <section className="w-full bg-white py-8 md:py-12 lg:pl-30">
       <div className="mx-auto max-w-8xl px-4 md:px-8">
         {/* HEADER */}
         <div className="mb-6 md:mb-8 flex items-center justify-between">

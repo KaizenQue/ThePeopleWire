@@ -135,7 +135,7 @@ export default function Home3() {
   };
 
   return (
-    <section className="w-full bg-white py-10">
+    <section className="w-full bg-white lg:pl-30">
       <div className="mx-auto max-w-8xl px-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">

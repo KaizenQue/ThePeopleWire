@@ -226,7 +226,7 @@ const Home1: React.FC = () => {
       {/* ================= DESKTOP ONLY (UNCHANGED LOGIC) ================= */}
       <div className="hidden lg:block">
         <section
-          className="w-full px-4 lg:px-8 py-12"
+          className="w-full px-8 lg:px-32 py-12"
           style={{ fontFamily: "var(--font-albert-sans)" }}
         >
           <h2 className="text-3xl font-bold text-black mb-8">Top Stories</h2>
