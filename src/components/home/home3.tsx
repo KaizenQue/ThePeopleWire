@@ -29,7 +29,7 @@ const articles: Article[] = [
   {
     id: 2,
     title: "Inside Modern Architecture",
-    image: "/1.png",
+    image: "/2.png",
     excerpt:
       "A deep dive into contemporary design trends shaping the future of architecture worldwide.",
     author: "Amal Neerad",
@@ -39,7 +39,7 @@ const articles: Article[] = [
   {
     id: 3,
     title: "Human Stories from Across the Globe",
-    image: "/1.png",
+    image: "/3.png",
     excerpt:
       "Powerful portraits and stories capturing emotion, culture, and human resilience.",
     author: "Amal Neerad",
@@ -49,7 +49,7 @@ const articles: Article[] = [
   {
     id: 4,
     title: "Travel Beyond the Obvious",
-    image: "/1.png",
+    image: "/4.png",
     excerpt:
       "Exploring destinations that rarely make it to travel brochures but leave lasting impressions.",
     author: "Amal Neerad",
@@ -69,7 +69,7 @@ const articles: Article[] = [
   {
     id: 6,
     title: "The Art of Slow Living",
-    image: "/1.png",
+    image: "/2.png",
     excerpt:
       "Why slowing down might be the most powerful productivity hack.",
     author: "Amal Neerad",
@@ -79,7 +79,7 @@ const articles: Article[] = [
   {
     id: 7,
     title: "Designing for Humans",
-    image: "/1.png",
+    image: "/3.png",
     excerpt:
       "Great design starts with empathy, not pixels.",
     author: "Amal Neerad",
@@ -89,7 +89,7 @@ const articles: Article[] = [
   {
     id: 8,
     title: "Inside Digital Newsrooms",
-    image: "/1.png",
+    image: "/4.png",
     excerpt:
       "How modern newsrooms operate in a 24/7 digital world.",
     author: "Amal Neerad",
@@ -109,7 +109,7 @@ const articles: Article[] = [
   {
     id: 10,
     title: "Where Journalism Meets Tech",
-    image: "/1.png",
+    image: "/2.png",
     excerpt:
       "AI, automation, and the future of storytelling.",
     author: "Amal Neerad",
