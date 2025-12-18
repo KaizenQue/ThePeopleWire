@@ -1,76 +1,157 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ChevronDownIcon } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
-	{ name: 'Home', href: '/' },
-	{ name: 'About Us', href: '/AboutUs' },
-	{ name: 'Contact Us', href: '/ContactUs' },
-	// { name: 'World', href: '/world' },
-	// { name: 'National', href: '/national' },
-	// { name: 'Politics', href: '/politics' },
-	// { name: 'Entertainment', href: '/entertainment' },
-	// { name: 'Health', href: '/health' },
-	// { name: 'Business', href: '/business' },
-	// { name: 'Sport', href: '/sport' },
-	// { name: 'Science', href: '/science' },
-	// { name: 'Blog', href: '/blog' },
-]
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/AboutUs" },
+  { name: "Contact Us", href: "/ContactUs" },
+];
 
 const AppNavbar = () => {
-	const pathname = usePathname();
+  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  return (
+    <>
+      {/* ================= HEADER ================= */}
+      <header className="w-full bg-white shadow-sm relative z-50">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="relative flex h-16 items-center">
 
-	return (
-		<div className="w-full h-auto flex items-center justify-center shadow-lg shadow-secondary">
-			<div className="w-full max-w-8xl px-4">
-				<DropdownMenu>
-					<div className="w-full h-16 flex flex-row items-center justify-center gap-16">
-						<Image
-							src={'icon.svg'}
-							alt="App Logo"
-							width={80}
-							height={80}
-						/>
-						<div className="w-full flex flex-row items-center justify-between gap-2 px-112">
-							{navLinks.map((link) => (
-								<Link key={link.name} href={link.href} className={cn("px-3 py-1", pathname.startsWith(link.href) ? "text-secondary bg-secondary/10 rounded" : "text-muted-foreground hover:text-secondary transition-colors duration-300")}>
-									{link.name}
-								</Link>
-							))}
-							{/* <DropdownMenuTrigger className="px-2 py-1 flex flex-row items-center justify-center cursor-pointer">
-								<span className="text-muted-foreground">Category</span>
-								<ChevronDownIcon className="ml-2 inline-block text-secondary" size={16} />
-							</DropdownMenuTrigger> */}
-						</div>	
-						<DropdownMenuContent align="end">
-								<DropdownMenuLabel>Navigation</DropdownMenuLabel>
-								<DropdownMenuSeparator />
-								{navLinks.map((link) => (
-									<DropdownMenuItem key={link.name} asChild>
-										<Link href={link.href} className={cn(pathname.startsWith(link.href) ? "text-secondary" : "text-muted-foreground")}>
-											{link.name}
-										</Link>
-									</DropdownMenuItem>
-								))}
-							</DropdownMenuContent>
-					</div>
-				</DropdownMenu>
-			</div>
-		</div>
-	);
-}
+            {/* Logo — Left */}
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/icon.svg"
+                alt="The People Wire"
+                width={110}
+                height={32}
+                priority
+              />
+            </Link>
+
+            {/* ================= CENTER NAV (Desktop & Tablet) ================= */}
+            <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-12">
+              {navLinks.map((link) => {
+                const active = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={cn(
+                      "text-sm font-medium transition-colors",
+                      active
+                        ? "text-orange-600 bg-orange-100 px-5 py-2 rounded-lg"
+                        : "text-gray-600 hover:text-orange-600"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* ================= Mobile Hamburger — Right ================= */}
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="ml-auto md:hidden flex flex-col gap-1.5"
+              aria-label="Open menu"
+            >
+              <span className="h-1 w-8 rounded bg-orange-500" />
+              <span className="h-1 w-6 rounded bg-orange-500 self-end" />
+              <span className="h-1 w-4 rounded bg-orange-500 self-end" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* ================= MOBILE FULLSCREEN MENU ================= */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 bg-white flex flex-col">
+
+          {/* Top bar */}
+          <div className="flex items-center justify-between px-4 h-16">
+            <Image
+              src="/icon.svg"
+              alt="The People Wire"
+              width={100}
+              height={30}
+            />
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="text-2xl font-light"
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Centered Nav Items */}
+          <div className="flex flex-1 flex-col items-center justify-center gap-10">
+            {navLinks.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={cn(
+                    "text-lg font-medium",
+                    active
+                      ? "text-orange-600 bg-orange-100 px-8 py-3 rounded-xl"
+                      : "text-gray-700"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Bottom Download Card */}
+          <div className="px-4 pb-6">
+            <div className="rounded-2xl bg-black p-6 text-white">
+              <div className="flex items-center gap-4">
+                <Image
+                  src="/app-icon.png"
+                  alt="App Icon"
+                  width={56}
+                  height={56}
+                />
+                <div>
+                  <h3 className="text-xl font-semibold">
+                    Download <span className="text-yellow-400">Our App</span>
+                  </h3>
+                  <p className="text-sm text-gray-300 mt-1">
+                    Get all things membership, straight to your inbox.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 flex gap-4">
+                <Image
+                  src="/appstore.png"
+                  alt="Download on App Store"
+                  width={150}
+                  height={48}
+                />
+                <Image
+                  src="/playstore.png"
+                  alt="Get it on Google Play"
+                  width={150}
+                  height={48}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default AppNavbar;
