@@ -234,24 +234,31 @@ export default function Home4() {
                       </span>
 
                       {/* ✅ READ MORE – CLICK FIX ONLY */}
-                      <button
-                        onMouseEnter={() => setLockHover(true)}
-                        onMouseLeave={() => setLockHover(false)}
-                        onClick={(e) => {
-                          console.log("Read More clicked");
-                          e.stopPropagation();
-                          // navigation logic here
-                        }}
-                        style={{ fontFamily: "var(--font-albert-sans)" }}
-                        className="flex items-center gap-2 rounded-lg border border-[#F25C05]
-  px-3 md:px-4 py-2 text-[14px] md:text-[16px]
-  font-semibold tracking-[-0.5px] text-[#F25C05]
-  hover:bg-orange-50
-  transition-transform duration-150 ease-out
-  active:scale-95"
-                      >
-                        Read More  <ArrowUpRight size={16} />
-                      </button>
+                       <a
+  href={`/mock-article/${article.id}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  onMouseEnter={() => setLockHover(true)}
+  onMouseLeave={() => setLockHover(false)}
+  onClick={(e) => {
+    console.log("Read More clicked");
+    e.stopPropagation();
+  }}
+  style={{ fontFamily: "var(--font-albert-sans)" }}
+  className="
+    inline-flex items-center gap-2
+    rounded-lg border border-[#F25C05]
+    px-3 md:px-4 py-2
+    text-[14px] md:text-[16px]
+    font-semibold tracking-[-0.5px] text-[#F25C05]
+    bg-transparent no-underline
+    hover:bg-orange-50
+    transition-transform duration-150 ease-out
+    active:scale-95
+  "
+>
+  Read More <ArrowUpRight size={16} />
+</a>
                     </div>
                   </div>
                 )}
