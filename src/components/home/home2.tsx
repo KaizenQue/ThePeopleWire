@@ -235,7 +235,7 @@ export default function Home4() {
                       </span>
 
                       {/* ✅ READ MORE – CLICK FIX ONLY */}
-                    <a
+               <a
   href={`/mock-article/${article.id}`}
   target="_blank"
   rel="noopener noreferrer"
@@ -251,15 +251,16 @@ export default function Home4() {
     rounded-lg border border-[#F25C05]
     px-3 md:px-4 py-2
     text-[14px] md:text-[16px]
-    font-semibold tracking-[-0.5px] text-[#F25C05]
+    font-semibold tracking-[-0.5px]
+    text-[#F25C05]
     bg-transparent no-underline
-    hover:bg-orange-50
-    transition-transform duration-150 ease-out
-    active:scale-95
+    hover:bg-[#F25C05] hover:text-white
+    transition-all duration-150 ease-out
   "
 >
   Read More <ArrowUpRight size={16} />
 </a>
+
 
                     </div>
                   </div>
