@@ -334,23 +334,44 @@ const Home1: React.FC = () => {
   </div>
 
   {/* STORE BUTTONS */}
-  <div className="
-    flex flex-col sm:flex-row
-    lg:flex-col xl:flex-row
-    gap-[clamp(8px,1vw,12px)]
+{/* STORE BUTTONS */}
+<div
+  className="
     mt-[clamp(12px,2vw,24px)]
-  ">
-    <img
-      src="/appstore.png"
-      alt="App Store"
-      className="w-[clamp(100px,9vw,114px)] h-[clamp(30px,2.5vw,34px)] object-contain"
-    />
-    <img
-      src="/playstore.png"
-      alt="Play Store"
-      className="w-[clamp(100px,9vw,114px)] h-[clamp(30px,2.5vw,34px)] object-contain"
-    />
-  </div>
+    flex
+    flex-row
+    md:flex-col
+    lg:flex-col xl:flex-row
+    gap-[10px]
+    items-start
+    md:items-end
+    w-full
+  "
+>
+  <img
+    src="/appstore.png"
+    alt="App Store"
+    className="
+      w-[96px]
+      md:w-[88px]
+      lg:w-[114px]
+      h-[30px]
+      object-contain
+    "
+  />
+  <img
+    src="/playstore.png"
+    alt="Play Store"
+    className="
+      w-[96px]
+      md:w-[88px]
+      lg:w-[114px]
+      h-[30px]
+      object-contain
+    "
+  />
+</div>
+
 </div>
 
 
