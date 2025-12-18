@@ -6,6 +6,9 @@ import Home2 from "@/components/home/home2";
 import Home3 from "@/components/home/home3";
 import Home4 from "@/components/home/home4";
 import Home5 from "@/components/home/home5";
+import Home6 from "@/components/home/home6";
+import Home8 from "@/components/home/home8";
+
 export default function Home() {
  return (
   <main className="flex min-h-screen flex-col items-center justify-between">
@@ -15,6 +18,8 @@ export default function Home() {
     <Home3/>
     <Home4/>
     <Home5/>
+    <Home6/>
+    <Home8/>
     <Footer />
   </main>
  );

@@ -1,6 +1,6 @@
 "use client";
 
-import "./home4.css";
+import "./home2.css";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
@@ -166,7 +166,7 @@ export default function Home4() {
                   transform transition-all duration-300 ease-out
                   ${
                     isActive
-                      ? "scale-100 bg-[#FFF7F0] shadow-xl"
+                      ? "scale-100 bg-[#FFF7F0] "
                       : "scale-[0.98] md:scale-[0.96] bg-white shadow-md hover:scale-[0.99] md:hover:scale-[0.98]"
                   }
                 `}

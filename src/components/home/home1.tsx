@@ -184,24 +184,43 @@ const Home1: React.FC = () => {
 
     {/* CTA */}
     <div className="bg-black rounded-2xl p-5 sm:p-6 md:p-7">
-      <img src="/logo-yellow.png" alt="" className="w-7 sm:w-8 mb-4" />
+      <div className="flex gap-4">
+        <img
+  src="/footerLogo.png"
+  alt=""
+  className="w-[72px] h-[72px] mb-4 object-contain"
+/>
+<div className="">
+<h3
+  style={{ fontFamily: "var(--font-albert-sans)" }}
+  className="mb-2  text-[24px] font-bold leading-normal tracking-[-0.48px] text-white"
+>
+  Download <span className="text-[#F3CB04]"> Our App </span> 
+  <br />
+  <span className="text-white">for more Updates!</span>
+</h3>
 
-      <h3
-        className="text-[22px] sm:text-[24px] md:text-[26px] font-extrabold tracking-[-0.52px] mb-2"
-        style={{ color: "#F3CB04" }}
-      >
-        Download Our App
-        <br />
-        <span className="text-white">for more Updates!</span>
-      </h3>
 
-      <p className="text-[14px] sm:text-[15px] font-medium text-white">
-        Get all things membership,
-        <br />
-        straight to your inbox.
-      </p>
+    <p
+  style={{ fontFamily: "var(--font-dm-sans)" }}
+  className="text-[15px] font-normal leading-normal text-[#CCC]"
+>
+  Get all things membership,
+  <br />
+  straight to your inbox.
+</p>
 
-      <div className="flex gap-3 mt-5 sm:mt-6">
+</div>
+<div>
+
+</div>
+ 
+    
+      </div>
+
+
+
+      <div className="flex gap-3 mt-5 sm:mt-6 items-center justify-center">
         <img
           src="/appstore.png"
           className="w-[110px] sm:w-[114px] h-[34px] object-contain"
@@ -278,38 +297,64 @@ const Home1: React.FC = () => {
             <div className="lg:col-span-3">
               <SmallStoryCard story={smallStories[0]} />
             </div>
+<div className="
+  lg:col-span-3
+  bg-black rounded-2xl
+  p-[clamp(16px,2vw,28px)]
+  flex flex-col justify-between
+">
+  {/* CONTENT */}
+  <div className="w-full max-w-full">
+    <img
+      src="/logo-yellow.png"
+      alt=""
+      className="w-[clamp(36px,3vw,44px)] h-[clamp(36px,3vw,44px)] mb-3 object-contain"
+    />
 
-            <div className="lg:col-span-3 bg-black rounded-2xl p-6 flex flex-col justify-between">
-<div>
-            <img src="/logo-yellow.png" alt="" className="w-8 mb-4" />
-            <h3
-  className="text-[26px] font-extrabold tracking-[-0.52px] mb-2"
-  style={{ fontFamily: "var(--font-albert-sans)", color: "#F3CB04" }}
->
-  Download Our App
-  <br />
-  <span className="text-white">for more Updates!</span>
-</h3>
+    <h3
+      style={{
+        fontFamily: "var(--font-albert-sans)",
+        fontSize: "clamp(20px, 2.1vw, 28px)",
+      }}
+      className="mb-2 font-extrabold leading-[1.15] tracking-[-0.52px] text-white"
+    >
+      Download <span className="text-[#F3CB04]"> Our App</span>
+      <br />
+      <span className="text-white">for more Updates!</span>
+    </h3>
 
-           <p
-  className="text-[15px] font-medium text-white"
-  style={{ fontFamily: "var(--font-albert-sans)" }}
->
-  Get all things membership,
-  <br />
-  straight to your inbox.
-</p>
+    <p
+      style={{ fontFamily: "var(--font-albert-sans)" }}
+      className="text-[clamp(13px,1.15vw,16px)] leading-[1.45] text-white"
+    >
+      Get all things membership,
+      <br />
+      straight to your inbox.
+    </p>
+  </div>
 
-          </div>
-            <div className="flex gap-3 mt-6">
-<img
-  src="/appstore.png"
-  alt="App Store"
-  className="w-[114.32px] h-[33.915px] object-contain"
-/>
-            <img src="/playstore.png" className="w-[114.32px] h-[33.915px] object-contain" />
-          </div>
-            </div>
+  {/* STORE BUTTONS */}
+  <div className="
+    flex flex-col sm:flex-row
+    lg:flex-col xl:flex-row
+    gap-[clamp(8px,1vw,12px)]
+    mt-[clamp(12px,2vw,24px)]
+  ">
+    <img
+      src="/appstore.png"
+      alt="App Store"
+      className="w-[clamp(100px,9vw,114px)] h-[clamp(30px,2.5vw,34px)] object-contain"
+    />
+    <img
+      src="/playstore.png"
+      alt="Play Store"
+      className="w-[clamp(100px,9vw,114px)] h-[clamp(30px,2.5vw,34px)] object-contain"
+    />
+  </div>
+</div>
+
+
+
 
             {smallStories.slice(1).map((story) => (
               <div key={story.id} className="lg:col-span-3">

@@ -1,6 +1,6 @@
 "use client";
 
-import "./home4.css";
+import "./home6.css";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
@@ -89,7 +89,7 @@ const articles: Article[] = [
 
 
 
-export default function Home4() {
+export default function Home6() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeId, setActiveId] = useState<number | null>(null);
   const [activeArrow, setActiveArrow] =
@@ -114,7 +114,7 @@ export default function Home4() {
         {/* HEADER */}
         <div className="mb-6 md:mb-8 flex items-center justify-between">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-            Business
+            Entertainment
           </h2>
 
           <div className="flex gap-3">
