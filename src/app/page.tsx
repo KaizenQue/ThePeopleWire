@@ -18,8 +18,8 @@ export default function Home() {
     <Home2/>
     <Home3/>
     <Home4/>
-    <Home5/>
     <Home6/>
+    <Home5/>
     <Home8/>
     {/* <LatestNews/> */}
     <Footer />
