@@ -25,8 +25,40 @@ type Story = {
   prf_img: string;
   date: string;
   link: string,
-};
 
+};
+function timeLatest(dateString: string): string {
+  const now = new Date();
+  const past = new Date(dateString);
+
+  const diffMs = now.getTime() - past.getTime();
+  const diffSec = Math.floor(diffMs / 1000);
+  const diffMin = Math.floor(diffSec / 60);
+  const diffHr = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHr / 24);
+
+  if (diffSec < 60) {
+    return "Just now";
+  }
+
+  if (diffMin < 60) {
+    return `${diffMin} min ago`;
+  }
+
+  if (diffHr < 24) {
+    return `${diffHr} hr${diffHr > 1 ? "s" : ""} ago`;
+  }
+
+  if (diffDay < 7) {
+    return `${diffDay} day${diffDay > 1 ? "s" : ""} ago`;
+  }
+
+  return past.toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
 /* ------------------ COMPONENTS ------------------ */
 
 const SmallStoryCard: React.FC<{ story: Story }> = ({ story }) => (
@@ -89,12 +121,14 @@ const SmallStoryCard: React.FC<{ story: Story }> = ({ story }) => (
             className="text-[10px] font-normal text-black"
           >
             {story.readTime}
+
           </span>
         </div>
       </div>
     </div>
   </div>
 );
+
 
 /* ------------------ MAIN ------------------ */
 
@@ -120,7 +154,7 @@ const Home1: React.FC = () => {
           author: first.author?.[0] || "Unknown",
           authorImage: "/profile.png",
           date: new Date(first.publish_datetime).toDateString(),
-          readTime: "5 Min Read",
+readTime: timeLatest(first.publish_datetime),
           link: first.link, 
         });
 
@@ -135,6 +169,8 @@ const Home1: React.FC = () => {
     readTime: "5 Min Read",
     prf_img: "",
     date: new Date(item.publish_datetime).toDateString(),
+    readTime: timeLatest(first.publish_datetime),
+
     link: item.link, // ✅ IMPORTANT
   })
 );
