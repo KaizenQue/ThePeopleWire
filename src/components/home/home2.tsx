@@ -15,6 +15,17 @@ type Article = {
   date: string;
 };
 
+type ApiArticle = {
+  id: string;
+  title: string;
+  image_url: string | null;
+  category?: string[];
+  author?: string[];
+  publish_datetime: string;
+  summary: string;
+  link: string;
+};
+
 const articles: Article[] = [
   {
     id: 1,
@@ -51,10 +62,11 @@ const articles: Article[] = [
 
 export default function Home4() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeId, setActiveId] = useState<number | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [activeArrow, setActiveArrow] =
     useState<"left" | "right" | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [apiArticles, setApiArticles] = useState<ApiArticle[]>([]);
 
   // 🔒 ADDITIVE FIX (nothing removed)
   const [lockHover, setLockHover] = useState(false);
@@ -80,6 +92,40 @@ export default function Home4() {
 
     setActiveArrow(dir);
   };
+
+  /* ---------------- DATA RETRIEVAL ---------------- */
+  useEffect(() => {
+      const fetchNews = async () => {
+        try {
+          const res = await fetch("/api/news?country=india&limit=8");
+          const json = await res.json();
+          const fetchedArticles: ApiArticle[] = json.data || [];
+  
+          if (!fetchedArticles.length) return;
+  
+          /* SMALL STORIES */
+          const mappedArticles: ApiArticle[] = fetchedArticles.map(
+            (item, index) =>
+              ({
+                id: item.id,
+                title: item.title,
+                image_url: item.image_url || "/home41.png",
+                category: item.category,
+                author: item.author,
+                publish_datetime: new Date(item.publish_datetime).toDateString(),
+                link: item.link,
+              } as ApiArticle)
+          );
+  
+  
+          setApiArticles(mappedArticles);
+        } catch (err) {
+          console.error("Failed to fetch news", err);
+        }
+      };
+  
+      fetchNews();
+    }, []);
 
   return (
     <section className="w-full bg-white py-8 md:py-12 lg:pl-30">
@@ -122,7 +168,7 @@ export default function Home4() {
           ref={scrollRef}
           className="flex gap-4 md:gap-6 overflow-x-scroll no-scrollbar"
         >
-          {articles.map((article) => {
+          {apiArticles.map((article) => {
             const isActive = activeId === article.id;
 
             return (
@@ -155,12 +201,11 @@ export default function Home4() {
                 {/* DEFAULT */}
                 {!isActive && (
                   <>
-                    <div className="relative h-[240px] md:h-[420px] w-full">
-                      <Image
-                        src={article.image}
+                    <div className="relative h-60 md:h-105 w-full">
+                      <img
+                        src={article.image_url || "/home41.png"}
                         alt={article.title}
-                        fill
-                        className="object-cover"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                     </div>
 
@@ -168,8 +213,8 @@ export default function Home4() {
                       <div>
                         <div className="mb-3 flex items-center gap-2">
                           <Image
-                            src={article.authorAvatar}
-                            alt={article.author}
+                            src={/* article.authorAvatar */ "/author.png"}
+                            alt={article.author ? article.author.join(", ") : "Unknown"}
                             width={24}
                             height={24}
                             className="rounded-full"
@@ -194,7 +239,7 @@ export default function Home4() {
                         style={{ fontFamily: "var(--font-dm-sans)" }}
                         className="mt-4 text-[13px] md:text-[15px] tracking-[-0.5px] text-[#727272]"
                       >
-                        {article.date}
+                        {article.publish_datetime}
                       </span>
                     </div>
                   </>
@@ -206,8 +251,8 @@ export default function Home4() {
                     <div>
                       <div className="mb-4 md:mb-6 flex items-center gap-2">
                         <Image
-                          src={article.authorAvatar}
-                          alt={article.author}
+                          src={/* article.authorAvatar */ "/author.png"}
+                          alt={article.author ? article.author.join(", ") : "Unknown"}
                           width={28}
                           height={28}
                           className="rounded-full"
@@ -225,13 +270,13 @@ export default function Home4() {
                         style={{ fontFamily: "var(--font-dm-sans)" }}
                         className="mt-3 md:mt-4 text-[15px] md:text-[18px] leading-[22px] md:leading-[25px] text-black"
                       >
-                        {article.excerpt}
+                        {article.summary}
                       </p>
                     </div>
 
                     <div className="mt-4 flex items-center justify-between">
                       <span className="text-xs md:text-sm text-gray-500">
-                        {article.date}
+                        {article.publish_datetime}
                       </span>
 
                       {/* ✅ READ MORE – CLICK FIX ONLY */}

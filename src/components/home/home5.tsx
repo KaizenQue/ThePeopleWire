@@ -15,6 +15,17 @@ type Article = {
   date: string;
 };
 
+type ApiArticle = {
+  id: string;
+  title: string;
+  image_url: string | null;
+  category?: string[];
+  author?: string[];
+  publish_datetime: string;
+  summary: string;
+  link: string;
+};
+
 const articles: Article[] = [
   {
     id: 1,
@@ -119,9 +130,10 @@ const articles: Article[] = [
 ];
 export default function Home3() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeId, setActiveId] = useState<number | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [activeArrow, setActiveArrow] =
     useState<"left" | "right" | null>(null);
+  const [apiArticles, setApiArticles] = useState<ApiArticle[]>([]);
 
   /* ✅ DESKTOP DETECTION (additive) */
   const [isDesktop, setIsDesktop] = useState(false);
@@ -142,6 +154,40 @@ export default function Home3() {
 
     setActiveArrow(dir);
   };
+
+  /* ---------------- DATA RETRIEVAL ---------------- */
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const res = await fetch("/api/news?category=science&category=technology&country=india&limit=8");
+        const json = await res.json();
+        const fetchedArticles: ApiArticle[] = json.data || [];
+
+        if (!fetchedArticles.length) return;
+
+        /* SMALL STORIES */
+        const mappedArticles: ApiArticle[] = fetchedArticles.map(
+          (item, index) =>
+            ({
+              id: item.id,
+              title: item.title,
+              image_url: item.image_url || "/home41.png",
+              category: item.category,
+              author: item.author,
+              publish_datetime: new Date(item.publish_datetime).toDateString(),
+              link: item.link,
+            } as ApiArticle)
+        );
+
+
+        setApiArticles(mappedArticles);
+      } catch (err) {
+        console.error("Failed to fetch news", err);
+      }
+    };
+
+    fetchNews();
+  }, []);
 
   return (
     <section className="w-full bg-white py-10 lg:pl-30">
@@ -184,7 +230,7 @@ export default function Home3() {
           ref={scrollRef}
           className="flex gap-6 overflow-x-scroll no-scrollbar py-4"
         >
-          {articles.map((article) => {
+          {apiArticles.map((article) => {
             const isActive = activeId === article.id;
 
             return (
@@ -214,11 +260,10 @@ export default function Home3() {
                 `}
               >
                 {/* Image */}
-                <Image
-                  src={article.image}
+                <img
+                  src={article.image_url || "/home41.png"}
                   alt={article.title}
-                  fill
-                  className="object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
 
                 {/* Gradient */}
@@ -230,12 +275,12 @@ export default function Home3() {
                     <>
                       <div className="flex items-center gap-2 text-xs opacity-90 mt-40">
                         <Image
-  src={article.authorAvatar}
-  alt={article.author}
-  width={18}
-  height={18}
-  className="w-[26px] h-[26px] rounded-full object-cover"
-/>
+                          src={/*article.authorAvatar*/ "/author.png"}
+                          alt={article.author ? article.author.join(", ") : "Unknown"}
+                          width={18}
+                          height={18}
+                          className="w-[26px] h-[26px] rounded-full object-cover"
+                        />
 
                         <span>By {article.author}</span>
                       </div>
@@ -246,7 +291,7 @@ export default function Home3() {
                         </h3>
 
                         <p className="mt-3 text-xs text-gray-300">
-                          {article.date}
+                          {article.publish_datetime}
                         </p>
                       </div>
                     </>
@@ -256,13 +301,13 @@ export default function Home3() {
                     <>
                       <div>
                         <div className="mb-4 flex items-center gap-2 text-xs">
-                               <Image
-  src={article.authorAvatar}
-  alt={article.author}
-  width={18}
-  height={18}
-  className="w-[30px] h-[30px] rounded-full object-cover"
-/>
+                            <Image
+                              src={/*article.authorAvatar*/ "/author.png"}
+                              alt={article.author ? article.author.join(", ") : "Unknown"}
+                              width={18}
+                              height={18}
+                              className="w-[30px] h-[30px] rounded-full object-cover"
+                            />
                           <span>By {article.author}</span>
                         </div>
 
@@ -271,34 +316,34 @@ export default function Home3() {
                         </h3>
 
                         <p className="mt-3 text-sm text-gray-200">
-                          {article.excerpt}
+                          {article.summary}
                         </p>
                       </div>
 
                       <div>
                         <p className="mb-4 text-xs text-gray-300">
-                          {article.date}
+                          {article.publish_datetime}
                         </p>
 
                         {/* ✅ Read More — desktop hover + mobile click feedback */}
                        <a
-  href="/mock-article"
-  target="_blank"
-  rel="noopener noreferrer"
-  onClick={(e) => e.stopPropagation()}
-  className="
-    inline-flex w-full items-center justify-center gap-2
-    rounded-md border border-orange-500 px-4 py-2
-    text-sm font-medium text-orange-500
-    bg-transparent no-underline
-    hover:bg-orange-500 hover:text-white
-    transition-all duration-150 ease-out
-    active:scale-95
-    lg:hover:scale-[0.97]
-  "
->
-  Read More <ArrowUpRight size={16} />
-</a>
+                          href="/mock-article"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="
+                            inline-flex w-full items-center justify-center gap-2
+                            rounded-md border border-orange-500 px-4 py-2
+                            text-sm font-medium text-orange-500
+                            bg-transparent no-underline
+                            hover:bg-orange-500 hover:text-white
+                            transition-all duration-150 ease-out
+                            active:scale-95
+                            lg:hover:scale-[0.97]
+                          "
+                        >
+                          Read More <ArrowUpRight size={16} />
+                        </a>
                       </div>
                     </>
                   )}
